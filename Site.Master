@@ -1,0 +1,151 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true"
+    CodeBehind="Site.master.cs"
+    Inherits="OnlineExaminationSystem.SiteMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+
+<title>Online Examination System</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="~/Content/site.css" rel="stylesheet" runat="server" />
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<form id="form1" runat="server" enctype="multipart/form-data">
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="top-navbar">
+
+<div class="nav-logo">
+    <i class="fa-solid fa-graduation-cap"></i> Online Examination System
+</div>
+
+<div class="nav-links">
+
+<%
+    string role = Session["RoleId"] != null ? Session["RoleId"].ToString() : "";
+%>
+
+<!-- ================= STUDENT NAVBAR ================= -->
+<% if (role == "2") { %>
+
+<asp:HyperLink runat="server" NavigateUrl="~/StudentDashboard.aspx">
+    <i class="fa-solid fa-house"></i> Dashboard
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/StudentProfile.aspx">
+    <i class="fa-solid fa-user"></i> Profile
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/StudentResults.aspx">
+    <i class="fa-solid fa-chart-line"></i> Results
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/StudentExamHistory.aspx">
+    <i class="fa-solid fa-clock-rotate-left"></i> History
+</asp:HyperLink>
+
+<% } %>
+
+<!-- ================= ADMIN NAVBAR ================= -->
+<% if (role == "1") { %>
+
+<asp:HyperLink runat="server" NavigateUrl="~/AdminDashboard.aspx">
+    <i class="fa-solid fa-chart-pie"></i> Dashboard
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/Student/FacultyList.aspx">
+    <i class="fa-solid fa-users"></i> Faculty
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/Student/StudentList.aspx">
+    <i class="fa-solid fa-user-graduate"></i> Students
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/ManageExams.aspx">
+    <i class="fa-solid fa-list-check"></i> Manage Exams
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/ExamHistory.aspx">
+    <i class="fa-solid fa-clock"></i> History
+</asp:HyperLink>
+
+<% } %>
+
+<!-- ================= FACULTY NAVBAR ================= -->
+
+<% if (Session["RoleId"] != null && Session["RoleId"].ToString() == "3") { %>
+
+<asp:HyperLink runat="server" NavigateUrl="~/FacultyDashboard.aspx" CssClass="nav-item">
+    <i class="fa-solid fa-house"></i> Dashboard
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/CreateExam.aspx" CssClass="nav-item">
+    <i class="fa-solid fa-plus"></i> Create Exam
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/ManageExams.aspx" CssClass="nav-item">
+    <i class="fa-solid fa-list"></i> My Exams
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/FacultyAnalytics.aspx" CssClass="nav-item">
+    <i class="fa-solid fa-chart-column"></i> Analytics
+</asp:HyperLink>
+
+<asp:HyperLink runat="server" NavigateUrl="~/FacultyProfile.aspx" CssClass="nav-item">
+    <i class="fa-solid fa-user"></i> Profile
+</asp:HyperLink>
+
+
+<% } %>
+
+<!-- ================= COMMON LOGOUT ================= -->
+
+<% if (!string.IsNullOrEmpty(role)) { %>
+
+<asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx" CssClass="logout-btn">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+</asp:HyperLink>
+
+<% } %>
+
+</div>
+
+</div>
+
+<!-- ================= PAGE CONTENT ================= -->
+
+<div class="main-content">
+
+<asp:ContentPlaceHolder ID="MainContent" runat="server">
+</asp:ContentPlaceHolder>
+
+</div>
+
+</form>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
