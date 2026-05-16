@@ -1,45 +1,30 @@
+﻿using MongoDB.Driver;
 using System;
-using System.Configuration;
-using MongoDB.Driver;
 
 namespace OnlineExaminationSystem.App_Start
 {
-    /// <summary>
-    /// Centralized MongoDB connection. Reads connection string and database
-    /// name from Web.config (appSettings) so we don't hardcode them everywhere.
-    /// Falls back to localhost defaults so existing pages keep working.
-    /// </summary>
     public static class MongoDbContext
     {
-        private static readonly Lazy<IMongoDatabase> _database =
-            new Lazy<IMongoDatabase>(BuildDatabase);
+        private static readonly IMongoDatabase _database;
 
-        public static IMongoDatabase Database => _database.Value;
-
-        public static IMongoClient Client { get; private set; }
-
-        private static IMongoDatabase BuildDatabase()
+        static MongoDbContext()
         {
-            string connStr = ConfigurationManager.AppSettings["MongoConnectionString"];
-            if (string.IsNullOrWhiteSpace(connStr))
+            // 🔥 FINAL FIX (NO DNS, NO CRASH)
+            var settings = new MongoClientSettings
             {
-                connStr = "mongodb://localhost:27017";
-            }
+                Server = new MongoServerAddress("localhost", 27017),
 
-            string dbName = ConfigurationManager.AppSettings["MongoDatabaseName"];
-            if (string.IsNullOrWhiteSpace(dbName))
-            {
-                dbName = "OnlineExamDB";
-            }
+                // 🚫 Disable DNS completely
+                DirectConnection = true,
 
-            Client = new MongoClient(connStr);
-            return Client.GetDatabase(dbName);
+                ServerSelectionTimeout = TimeSpan.FromSeconds(5),
+                ConnectTimeout = TimeSpan.FromSeconds(5)
+            };
+
+            var client = new MongoClient(settings);
+            _database = client.GetDatabase("OnlineExamDB");
         }
 
-        /// <summary>Convenience accessor for a typed collection.</summary>
-        public static IMongoCollection<T> GetCollection<T>(string name)
-        {
-            return Database.GetCollection<T>(name);
-        }
+        public static IMongoDatabase Database => _database;
     }
 }

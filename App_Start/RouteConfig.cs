@@ -1,21 +1,14 @@
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
-namespace OnlineExaminationSystem.App_Start
+namespace OnlineExaminationSystem
 {
-    /// <summary>
-    /// Friendly-URLs configuration. We let ASP.NET FriendlyUrls
-    /// resolve .aspx extensions automatically.
-    /// </summary>
-    public static class RouteConfig
+    public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            var settings = new FriendlyUrlSettings
-            {
-                AutoRedirectMode = RedirectMode.Permanent
-            };
-
+            var settings = new FriendlyUrlSettings();
+            settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
         }
     }
