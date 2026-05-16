@@ -222,7 +222,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\Site.css" />
+    <!-- Content\Site.css replaced by lowercase Content\site.css further down. -->
     <Content Include="CreateExam.aspx" />
     <Content Include="DownloadExamPdf.aspx" />
     <Content Include="EditExam.aspx" />
@@ -633,6 +633,177 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- ============================================================
+       New files added in the build-out (Wave 1 - Wave 4).
+       Kept in their own ItemGroups so future regenerations of the
+       upper section don't touch them.
+       ============================================================ -->
+  <ItemGroup>
+    <!-- Content (markup files) -->
+    <!-- Web.Debug.config already declared further down as <None>. -->
+    <Content Include="Default.aspx" />
+    <Content Include="Notifications.aspx" />
+    <Content Include="RequestRecheck.aspx" />
+    <Content Include="ManageRechecks.aspx" />
+    <Content Include="RecheckRequests.aspx" />
+    <Content Include="Leaderboard.aspx" />
+    <Content Include="CheckAnswers.aspx" />
+    <Content Include="PublishResults.aspx" />
+    <Content Include="MyExams.aspx" />
+    <Content Include="AddStudent.aspx" />
+    <Content Include="ManageStudents.aspx" />
+    <Content Include="ManageFaculty.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="Profile.aspx" />
+    <Content Include="ChangePassword.aspx" />
+    <Content Include="Content\site.css" />
+    <Content Include="Scripts\examTimer.js" />
+    <Content Include="Scripts\antiCheat.js" />
+    <Content Include="Scripts\fullscreen.js" />
+    <Content Include="Scripts\dashboard.js" />
+    <Content Include="Scripts\validation.js" />
+    <Content Include="Scripts\notifications.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Code-behind files -->
+    <!-- App_Start (already declared in main ItemGroup):
+         App_Start\MongoDbContext.cs.cs, App_Start\RouteConfig.cs, Properties\AssemblyInfo.cs
+         Services\EmailService.cs, Services\FacultyAccountService.cs
+         Models\{Exam,Faculty,LoginAudit,Question,ExamResult,ReviewItem,Student,User}.cs -->
+
+    <!-- New models (Notification + RecheckRequest) -->
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\RecheckRequest.cs" />
+
+    <!-- New services -->
+    <Compile Include="Services\FacultyInviteResult.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+
+    <!-- Default landing page -->
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Notifications -->
+    <Compile Include="Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Recheck workflow -->
+    <Compile Include="RequestRecheck.aspx.cs">
+      <DependentUpon>RequestRecheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestRecheck.aspx.designer.cs">
+      <DependentUpon>RequestRecheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageRechecks.aspx.cs">
+      <DependentUpon>ManageRechecks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageRechecks.aspx.designer.cs">
+      <DependentUpon>ManageRechecks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RecheckRequests.aspx.cs">
+      <DependentUpon>RecheckRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecheckRequests.aspx.designer.cs">
+      <DependentUpon>RecheckRequests.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Leaderboard -->
+    <Compile Include="Leaderboard.aspx.cs">
+      <DependentUpon>Leaderboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Leaderboard.aspx.designer.cs">
+      <DependentUpon>Leaderboard.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Faculty descriptive grading -->
+    <Compile Include="CheckAnswers.aspx.cs">
+      <DependentUpon>CheckAnswers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckAnswers.aspx.designer.cs">
+      <DependentUpon>CheckAnswers.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Admin publish results -->
+    <Compile Include="PublishResults.aspx.cs">
+      <DependentUpon>PublishResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublishResults.aspx.designer.cs">
+      <DependentUpon>PublishResults.aspx</DependentUpon>
+    </Compile>
+
+    <!-- MyExams -->
+    <Compile Include="MyExams.aspx.cs">
+      <DependentUpon>MyExams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyExams.aspx.designer.cs">
+      <DependentUpon>MyExams.aspx</DependentUpon>
+    </Compile>
+
+    <!-- AddStudent -->
+    <Compile Include="AddStudent.aspx.cs">
+      <DependentUpon>AddStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddStudent.aspx.designer.cs">
+      <DependentUpon>AddStudent.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Spec aliases -->
+    <Compile Include="ManageStudents.aspx.cs">
+      <DependentUpon>ManageStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageStudents.aspx.designer.cs">
+      <DependentUpon>ManageStudents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageFaculty.aspx.cs">
+      <DependentUpon>ManageFaculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageFaculty.aspx.designer.cs">
+      <DependentUpon>ManageFaculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+
+    <!-- ChangePassword -->
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
